@@ -7,11 +7,11 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    BankingModule,
-    HttpModule.register({
-      baseURL: process.env.BACKEND_URL,
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
+    BankingModule,
+    HttpModule,
   ],
   controllers: [AppController],
   providers: [AppService],
