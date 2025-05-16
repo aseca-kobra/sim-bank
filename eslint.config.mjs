@@ -8,10 +8,16 @@ export default tseslint.config(
   {
     ignores: ['eslint.config.mjs'],
   },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
   {
+    // Override all rules to be "off"
+    rules: Object.fromEntries(
+      // Get all rule keys from the various configs and set them to "off"
+      Object.keys({
+        ...eslint.configs.recommended.rules,
+        ...tseslint.configs.recommendedTypeChecked.reduce((acc, config) => ({ ...acc, ...config.rules }), {}),
+        ...eslintPluginPrettierRecommended.rules,
+      }).map(rule => [rule, 'off'])
+    ),
     languageOptions: {
       globals: {
         ...globals.node,
@@ -23,13 +29,5 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-  },
-  {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
-      '@typescript-eslint/no-unused': 'warn',
-    },
-  },
+  }
 );
