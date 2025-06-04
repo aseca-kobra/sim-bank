@@ -1,20 +1,24 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { BankingService } from './banking.service';
-import { DepositDto } from './dto/deposit.dto';
+import { BankOperationDto } from './dto/deposit.dto';
 import { ExternalApiResponse } from './interfaces/external-api-response.interface';
-import { DebinDto } from './dto/debin.dto';
 
 @Controller()
 export class BankingController {
   constructor(private readonly bankingService: BankingService) {}
 
   @Post('deposit')
-  async deposit(@Body() depositDto: DepositDto): Promise<void> {
-    await this.bankingService.deposit(depositDto);
+  async deposit(@Body() bankOperationDto: BankOperationDto): Promise<ExternalApiResponse> {
+    return this.bankingService.deposit(bankOperationDto);
   }
 
   @Post('debin')
-  async debin(@Body() debinDto: DebinDto): Promise<ExternalApiResponse> {
-    return this.bankingService.debin(debinDto);
+  async debin(@Body() bankOperationDto: BankOperationDto): Promise<ExternalApiResponse> {
+    return this.bankingService.debin(bankOperationDto);
+  }
+
+  @Get('status')
+  getStatus(): Record<string, number> {
+    return this.bankingService.getStatus();
   }
 }

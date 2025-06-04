@@ -1,4 +1,4 @@
-export class DepositDto {
+export class BankOperationDto {
+  email: string;
   amount: number;
-  walletId: string;
 } 

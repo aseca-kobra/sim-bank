@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
   imports: [
     HttpModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
-        baseURL: configService.get('BASE_URL'),
+        baseURL: configService.get('BACK_API_URL'),
       }),
       inject: [ConfigService],
     }),
