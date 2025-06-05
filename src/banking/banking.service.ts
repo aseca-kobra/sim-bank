@@ -32,7 +32,7 @@ export class BankingService {
       
       console.log(`Loaded ${users.length} users from users.json into memory`);
     } catch (error) {
-      console.error('❌ Error loading users from users.json:', error);
+      console.error('Error loading users from users.json:', error);
       this.accounts = new Map([
         ['luz@example.com', 1000],
         ['santos@example.com', 1000],
