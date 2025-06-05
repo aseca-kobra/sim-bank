@@ -22,7 +22,8 @@ export class BankingService {
 
   private loadUsers(): void {
     try {
-      const usersFilePath = path.join(__dirname, 'resources', 'users.json');
+      const projectRoot = process.cwd();
+      const usersFilePath = path.join(projectRoot, 'src', 'banking', 'resources', 'users.json');
       const usersData = fs.readFileSync(usersFilePath, 'utf8');
       const users: User[] = JSON.parse(usersData);
 
