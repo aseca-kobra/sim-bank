@@ -56,7 +56,7 @@ export class BankingService {
       return { success: false, message: 'Insufficient funds' };
     }
 
-    this.accounts.set(email, current - amount);
+    //this.accounts.set(email, current - amount);
 
     try {
       await firstValueFrom(
@@ -83,7 +83,7 @@ export class BankingService {
     if (current < amount) {
       return { success: false, message: 'Insufficient funds' };
     }
-    this.accounts.set(email, current - amount);
+    //this.accounts.set(email, current - amount);
     return { success: true, message: `Debited ${amount} from ${email}` };
   }
 
